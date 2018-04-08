@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAlumnosTable extends Migration
+class Visitantes extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateAlumnosTable extends Migration
      */
     public function up()
     {
-        Schema::create('alumnos', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
+        Schema::create('visitantes', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+            $table->integer('no_id');
+            $table->primary('no_id');
+            $table->string('nombre');
         });
     }
 
@@ -26,6 +28,6 @@ class CreateAlumnosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('alumnos');
+        Schema::dropIfExists('visitantes');
     }
 }

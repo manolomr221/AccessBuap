@@ -4,12 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Alumnos extends Model
+class Visitantes extends Model
 {
+    //
     protected $filleable =[
-        'nombre', 'matricula', 'facultad', 'carrera'
+        'nombre','no_id'
     ];
-    
     public function Vehiculo(){
         return $this->hasMany('App\vehiculo', 'matricula', 'matricula');
     }

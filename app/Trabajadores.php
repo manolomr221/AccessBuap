@@ -4,10 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Alumnos extends Model
+class Trabajadores extends Model
 {
+    //
     protected $filleable =[
-        'nombre', 'matricula', 'facultad', 'carrera'
+        'nombre', 'matricula', 'facultad'
     ];
     
     public function Vehiculo(){
