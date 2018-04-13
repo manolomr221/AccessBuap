@@ -18,3 +18,13 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+//Registrar
+Route::get('/Admin/registrar', 'HomeController@registrar')->name('registrar');
+Route::post('/Admin/registrar/nuevoA', 'HomeController@registrarNuevoA')->name('nuevoA');
+Route::post('/Admin/registrar/nuevoT', 'HomeController@registrarNuevoT')->name('nuevoT');
+
+//Accesos
+Route::get('/acceso', 'HomeController@acceso')->name('acceso');
+Route::post('/accesoV', 'HomeController@accesoV')->name('accesoV');
+

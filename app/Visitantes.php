@@ -8,7 +8,7 @@ class Visitantes extends Model
 {
     //
     protected $filleable =[
-        'nombre','no_id'
+        'nombre','no_id', 'motivo'
     ];
     public function Vehiculo(){
         return $this->hasMany('App\vehiculo', 'matricula', 'matricula');

@@ -123,41 +123,84 @@ body{
   
 <div class="container-fluid text-center">    
     <div class="row content">
-      <div class="col-sm-12">
-          <div class="container-fluid text-center">
-            <h2 id="ser">SERVICIOS</h2>
-            <br>
-            <h4 id="ser">INICIA SESIÓN PARA REALIZAR ALGUNA DE LAS SIGUIENTES ACCIONES</h4>
-           <div class="row">
-           <hr> <!-- quitar lineas -->
-      <br>
-      <br>
-      <br>
-      <br>
-       <a href="{{url ('/acceso')}}"><div class="col-sm-3" id="cuadro">
-          <span class="glyphicon glyphicon-duplicate logo-small"></span>
-          <h4>Registrar Accesos Comunidad Buap</h4>
-       </div></a>
-       <div class="col-sm-2" id="cuadro">
-          <span class="glyphicon glyphicon-calendar logo-small"></span>
-         <h4>Registrar Salidas</h4>
-      </div>
-      <a href="{{url ('/Admin/registrar')}}"><div class="col-sm-3" id="cuadro">
-         <span class="glyphicon glyphicon-user logo-small"></span>
-         <h4>Registrar Personas</h4>
-      </div></a>
-      <div class="col-sm-2" id="cuadro">
-        <span class="glyphicon glyphicon-road logo-small"></span>
-        <h4>Registrar Vehiculos</h4>
-      </div>
-      <div class="col-sm-2" id="cuadro" >
-        <span class="glyphicon glyphicon-bold logo-small"></span>
-        <h4>Registrar Bicicletas</h4>
-      </div>
-           </div>
-        </div>  
-      </div>
+        <div class="col-sm-12">
+            <div class="container-fluid text-center">
+                <h2 id="ser">REGISTRO</h2>
+                
+            </div>  
+        </div>
+        <div class="form-check">
+                    <input class="form-check-input" type="radio" name="registrarPersona" id="exampleRadios1" value="option1" checked>
+                    <label class="form-check-label" for="exampleRadios1">
+                    Alumno
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="registrarPersona" id="exampleRadios2" value="option2">
+                    <label class="form-check-label" for="exampleRadios2">
+                    Trabajador
+                    </label>
+                </div>
+                <form id="traba" class= "form-horizontal" action="/Admin/registrar/nuevoT" method="POST">
+                {{ csrf_field() }}
+                <div class="form-group">
+                        <label class="col-sm-2 control-label">Número Trabajador</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="matricula" name="matricula">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Nombre</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="nombreAlumno" name="nombreAlumno">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Facultad</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="facultad" name="facultad">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-10 col-sm-offset-2">
+                          <button id="guardarCambios" type="submit" class="btn btn-primary form-control" >Guardar Cambios</button>
+                        </div>
+                     
+                </form>
+                <form id="formAlumno" class= "form-horizontal" action="/Admin/registrar/nuevoA" method="POST">
+                {{ csrf_field() }}
+                <div class="form-group">
+                        <label class="col-sm-2 control-label">Matricula</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="matricula" name="matricula">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Nombre</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="nombreAlumno" name="nombreAlumno">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Facultad</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="facultad" name="facultad">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Carrera</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="carrera" name="carrera">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-10 col-sm-offset-2">
+                          <button id="guardarCambios" type="submit" class="btn btn-primary form-control" >Guardar Cambios</button>
+                        </div>
+                     
+                </form>
     </div>
+    
 </div>
 <hr>  <!-- quitar lineas -->
 <footer class="container-fluid text-center">
@@ -184,3 +227,18 @@ body{
 </footer>
 </body>
 </html>
+<script>
+$(document).ready(function() {
+    $('input[type=radio][name=registrarPersona]').change(function() {
+        if (this.value == 'option1') {
+            $("form#formAlumno").css("display","block");
+            $("form#traba").hide();
+        }
+        if (this.value == 'option2') {
+            $("form#formAlumno").hide();
+            $("form#traba").css("display","block");
+        }
+    });
+});
+</script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
