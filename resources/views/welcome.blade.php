@@ -147,7 +147,7 @@ body{
          <h4>Registrar Personas</h4>
       </div>
       <div class="col-sm-2" id="cuadro">
-        <span class="glyphicon glyphicon-road logo-small"></span>
+        <a href="{{ url('/vehiculo') }}"><span class="glyphicon glyphicon-road logo-small"></span></a>
         <h4>Registrar Vehiculos</h4>
       </div>
       <div class="col-sm-2" id="cuadro" >
@@ -165,7 +165,7 @@ body{
         <div class="col-sm-2 col-md-4">
           <div class="logo_buap">
 		          <a target="blanks" href="http://www.buap.mx/">
-		          <img src="http://radiobuap.com/wp-content/uploads/2014/07/EscudoBUAPnegro350x350.png"  width="180" height="170" background-color="white">
+		          <img src="http://cmas.siu.buap.mx/portal_pprd/imagenes/recursos_graficos/escudo/escudo_negativo.png"  width="180" height="170" background-color="white">
 		          </a>
 	        </div>
         </div>
