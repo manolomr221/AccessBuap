@@ -18,7 +18,8 @@
 	    			<div class="contact-form">
 	    				<h2 class="title text-center">Datos del vehículo</h2>
 	    				<div class="status alert alert-success" style="display: none"></div>
-				    	<form id="main-contact-form" class="contact-form row" name="contact-form" method="post">
+				    	<form id="main-contact-form" class="contact-form row" name="contact-form" method="POST" action="/registrarVehiculo" >                                                           
+                        {{ csrf_field() }}
 				            <div class="form-group col-md-6">
 				                <input type="text" name="placa" class="form-control" required="required" placeholder="Placas">
 				            </div>

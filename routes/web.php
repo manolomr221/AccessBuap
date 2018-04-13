@@ -26,3 +26,5 @@ Route::post('/configuracion/{id}/guardarCambios','HomeController@guardarCambios'
 Route::post('/configuracion/{id}/actualizarContraseña','HomeController@actualizaContraseña');
 Route::post('configuracion/{id}/updatepassword', 'UserController@updatePassword');
 
+Route::post('/registrarVehiculo', 'UserController@registrarVehiculo');
+
