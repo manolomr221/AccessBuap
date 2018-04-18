@@ -49,4 +49,15 @@ class UserController extends Controller
             }
         }
     }
+
+    public function registrarVehiculo(Request $request){
+        DB::table('vehiculos')-> insert([
+            'placas'=>$request->placa,
+            'marca'=>$request->marca,
+            'modelo'=>$request->modelo,
+            'color'=>$request->color
+            ]);
+        return redirect()->action('HomeController@vehiculo')->with('message','Registro correcto'); 
+    }
+
 }

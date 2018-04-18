@@ -18,6 +18,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+	
+Route::get('/vehiculo', 'HomeController@vehiculo')->name('vehiculo');
 
 //Registrar
 Route::get('/Admin/registrar', 'HomeController@registrar')->name('registrar');
@@ -32,3 +34,6 @@ Route::get('/configuracion/{id}','HomeController@informacionCuenta');
 Route::post('/configuracion/{id}/guardarCambios','HomeController@guardarCambios');
 Route::post('/configuracion/{id}/actualizarContraseña','HomeController@actualizaContraseña');
 Route::post('configuracion/{id}/updatepassword', 'UserController@updatePassword');
+
+Route::post('/registrarVehiculo', 'UserController@registrarVehiculo');
+

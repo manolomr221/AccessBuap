@@ -76,6 +76,11 @@ class HomeController extends Controller
     
       return redirect()->action('HomeController@registrar');
     }
+    public function vehiculo()
+    {
+        return view('vehiculo');
+    }
+
     public function informacionCuenta(Request $request, $id){        
         $ID=Crypt::decrypt($id);
         $info = DB::table('users')->where('id',$ID)->first();     
@@ -108,3 +113,4 @@ class HomeController extends Controller
 
 
 }
+
