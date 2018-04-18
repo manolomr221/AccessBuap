@@ -28,3 +28,7 @@ Route::post('/Admin/registrar/nuevoT', 'HomeController@registrarNuevoT')->name('
 Route::get('/acceso', 'HomeController@acceso')->name('acceso');
 Route::post('/accesoV', 'HomeController@accesoV')->name('accesoV');
 
+Route::get('/configuracion/{id}','HomeController@informacionCuenta');
+Route::post('/configuracion/{id}/guardarCambios','HomeController@guardarCambios');
+Route::post('/configuracion/{id}/actualizarContraseña','HomeController@actualizaContraseña');
+Route::post('configuracion/{id}/updatepassword', 'UserController@updatePassword');
