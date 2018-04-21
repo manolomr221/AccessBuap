@@ -1,282 +1,113 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+@extends('layouts.app')
+@section('content')
   <title>AccesBuap</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <style>
-    /* Remove the navbar's default margin-bottom and rounded borders */ 
-    .navbar {
-      margin-bottom: 0;
-      border-radius: 0;
-    }
-    
-    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-    .row.content {height: 450px}
-
-    /* Set gray background color and 100% height */
-    .sidenav {
-      padding-top: 20px;
-      background-color: #f1f1f1;
-      height: 100%;
-    }
-        
-    /* On small screens, set height to 'auto' for sidenav and grid */
-    @media screen and (max-width: 767px) {
-      .sidenav {
-        height: auto;
-        padding: 15px;
-      }
-      .row.content {height:auto;} 
-    }
-
-     footer, .nv {
-      background-color: #003B5C;
-      color: white;
-      font-size: 100%;  
-    }
-
-    footer{
-      height: 40%;
-      padding: 5px;
-      padding-bottom: 20px;
-    }
-
-    .logo-small {
-    color: #5d98f7;
-    font-size: 50px;
-}
-
-#cuadro{
-  padding: 10px; 
-}
- #ser{
-  text-align: center;
-    text-transform: uppercase;
-    color: black;
-    font-family: "Times New Roman", Times, serif;
- }
-
- hr{border: 0; border-top: 1px solid #003B5C; border-bottom: 1px ;}
-  
-  p{
-    padding: 25px;
-  }
-
-  .icon-bar{ background-color: gray;}
-
-  a.nv:hover{
-  background-color: white;
-  }
-  
-  .logo-small:hover{
-color: #004bc4;
-}
-
-body{
-  background-color: #f2f2f2;
-}
-
-  </style>
-</head>
-
-<body>
-<nav class="navbar nv">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
-      </button>
-      <a class="navbar-brand nv" href="{{ url('/') }}">AccesBuap</a>
+<div class="container">
+  <h2 align="center">Registrar Accesos</h2>
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#home">Alumno</a></li>
+    <li><a data-toggle="tab" href="#menu1">Trabajador</a></li>
+    <li><a data-toggle="tab" href="#menu2">Visitante</a></li>
+  </ul>
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+    <br>
+    <form id="formAlumno" class= "form-horizontal" action="/Admin/registrar/nuevoA" method="POST">
+    {{ csrf_field() }}
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="matriculaA">Matricula:</label>
+      <div class="col-sm-10">
+        <input type="number" required class="form-control" id="matriculaA" placeholder="Ingresa la matricula del Alumno" name="matriculaA">
+      </div>
     </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-    <ul class="nav nav-pills navbar-right">
-    <!-- Authentication Links -->
-    @if (Auth::check())
-        <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                {{ Auth::user()->name }} <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu" role="menu">
-                <li>
-                    <a 
-                        onclick="event.preventDefault();
-                                 document.getElementById('logout-form').submit();">
-                        Logout
-                    </a>
-                    <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-                        {{ csrf_field() }}
-                    </form>
-                </li>
-            </ul>
-        </li>
-    @endif
-</ul>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="nombreAlumno">Nombre:</label>
+      <div class="col-sm-10">
+        <input type="text" required class="form-control" id="nombreAlumno" placeholder="Ingresa Nombre del Alumno" name="nombreAlumno">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="facultadA">Facultad:</label>
+      <div class="col-sm-10">          
+        <input type="text" required class="form-control" id="facultadA" placeholder="Ingresa la Facultad del Alumno" name="facultadA">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="carrera">Carrera:</label>
+      <div class="col-sm-10">          
+        <input type="text" required class="form-control" id="carrera" placeholder="Ingresa la Carrera del Alumno" name="carrera">
+      </div>
+    </div>   
+    <div class="form-group">        
+      <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-primary form-control" >Guardar Acceso</button>
+      </div>
+    </div>
+  </form>
+    </div>
+    <div id="menu1" class="tab-pane fade">
+    <br>
+    <form id="traba" class= "form-horizontal" action="/Admin/registrar/nuevoT" method="POST">
+    {{ csrf_field() }}
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="matriculaT">Numero de Trabajador</label>
+      <div class="col-sm-10">
+        <input type="number" required class="form-control" id="matriculaT" placeholder="Ingresa numero de trabajador" name="matriculaT">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="nombreT">Nombre</label>
+      <div class="col-sm-10">          
+        <input type="text" required class="form-control" id="nombreT" placeholder="Ingresa Nombre del Trabajador" name="nombreT">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="facultadT">Facultad</label>
+      <div class="col-sm-10">          
+        <input type="text" required class="form-control" id="facultadT" placeholder="Ingresa la Facultad del Trabajador" name="facultadT">
+      </div>
+    </div>
+    <div class="form-group">        
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-primary form-control" >Guardar Acceso</button>
+      </div>
+    </div>
+  </form>
+    </div>
+    <div id="menu2" class="tab-pane fade">
+    <br>
+    <form id="formVisitante" class= "form-horizontal" action="/accesoV" method="POST">
+    {{ csrf_field() }}
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="no_id">Número de Identificación:</label>
+      <div class="col-sm-10">
+        <input type="number" required class="form-control" id="no_id" placeholder="Ingresa el número de identificación" name="no_id">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="nombrev">Nombre:</label>
+      <div class="col-sm-10">          
+        <input type="text" required class="form-control" id="nombrev" placeholder="Ingresa el Nombre del Visitante" name="nombrev">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="motivo">Motivo de la visita</label>
+      <div class="col-sm-10">          
+        <input type="text" required class="form-control" id="motivo" placeholder="Ingresa el Motivo de la visita" name="motivo">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="acceso_entrada">Acceso</label>
+      <div class="col-sm-10">          
+        <input type="text" required class="form-control" id="acceso_entrada" placeholder="Ingresa el acceso por el cual entra" name="acceso_entrada">
+      </div>
+    </div>
+    <div class="form-group">        
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-primary form-control" >Guardar Acceso</button>
+      </div>
+    </div>
+  </form>
     </div>
   </div>
-</nav>
-  
-<div class="container-fluid text-center">    
-    <div class="row content">
-        <div class="col-sm-12">
-            <div class="container-fluid text-center">
-                <h2 id="ser">Acceso</h2>
-                
-            </div>  
-        </div>
-        <div class="form-check">
-                    <input class="form-check-input" type="radio" name="registrarPersona" id="exampleRadios1" value="option1" checked>
-                    <label class="form-check-label" for="exampleRadios1">
-                    Alumno
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="registrarPersona" id="exampleRadios2" value="option2">
-                    <label class="form-check-label" for="exampleRadios2">
-                    Trabajador
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="registrarPersona" id="exampleRadios2" value="option2">
-                    <label class="form-check-label" for="exampleRadios2">
-                    Visitante
-                    </label>
-                </div>
-                <form id="traba" class= "form-horizontal" action="/Admin/registrar/nuevoT" method="POST">
-                {{ csrf_field() }}
-                <div class="form-group">
-                        <label class="col-sm-2 control-label">Número Trabajador</label>
-                        <div class="col-sm-10">
-                            <input type="number" class="form-control" id="matriculaT" name="matriculaT">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Nombre</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="nombreT" name="nombreT">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Facultad</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="facultadT" name="facultadT">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-10 col-sm-offset-2">
-                          <button id="guardarCambios" type="submit" class="btn btn-primary form-control" >Guardar Acceso</button>
-                        </div>
-                     
-                </form>
-                <form id="formAlumno" class= "form-horizontal" action="/Admin/registrar/nuevoA" method="POST">
-                {{ csrf_field() }}
-                <div class="form-group">
-                        <label class="col-sm-2 control-label">Matricula</label>
-                        <div class="col-sm-10">
-                            <input type="number" class="form-control" id="matriculaA" name="matriculaA">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Nombre</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="nombreAlumno" name="nombreAlumno">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Facultad</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="facultadA" name="facultadA">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Carrera</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="carrera" name="carrera">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-10 col-sm-offset-2">
-                          <button id="guardarCambios" type="submit" class="btn btn-primary form-control" >Guardar Cambios</button>
-                        </div>
-                     
-                </form>
-                <form id="formVisitante" class= "form-horizontal" action="/accesoV" method="POST">
-                {{ csrf_field() }}
-                <div class="form-group">
-                        <label class="col-sm-2 control-label">Numero de Identificacion</label>
-                        <div class="col-sm-10">
-                            <input type="number" class="form-control" id="no_id" name="no_id">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Nombre</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="nombreV" name="nombreV">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Motivo de la Visita</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="motivo" name="motivo">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Acceso</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="acceso_entrada" name="acceso_entrada">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-10 col-sm-offset-2">
-                          <button id="guardarCambios" type="submit" class="btn btn-primary form-control" >Guardar Acceso</button>
-                        </div>
-                     
-                </form>
-    </div>
-    
 </div>
-<hr>  <!-- quitar lineas -->
-<footer class="container-fluid text-center">
-    <div class="row">
-        <div class="col-sm-2 col-md-4">
-          <div class="logo_buap">
-		          <a target="blanks" href="http://www.buap.mx/">
-		          <img src="http://radiobuap.com/wp-content/uploads/2014/07/EscudoBUAPnegro350x350.png"  width="180" height="170" background-color="white">
-		          </a>
-	        </div>
-        </div>
-        <div class="col-sm-10 col-md-8" >
-           <p><strong>Benemérita Universidad Autónoma de Puebla</strong><br />
-            4 Sur 104 Centro Histórico C.P. 72000<br />
-            Teléfono +52 (222) 229 55 00</p>
-          <div class="redes">
-            <a href="https://twitter.com/buapoficial" target="_blank"><img src="http://www.buap.mx/sites/all/themes/nuevo_sitio/img/twitter.png" /></a>
-            <a href="https://www.facebook.com/BUAPoficial" target="_blank"><img src="http://www.buap.mx/sites/all/themes/nuevo_sitio/img/facebook.png" /></a>
-            <a href="https://instagram.com/buapoficial/" target="_blank"><img src="http://www.buap.mx/sites/all/themes/nuevo_sitio/img/instagram.png" /></a>
-            <a href="https://www.youtube.com/user/ibuap" target="_blank"><img src="http://www.buap.mx/sites/all/themes/nuevo_sitio/img/youtube.png" /></a>
-          </div>
-        </div>
-    </div>
-</footer>
-</body>
-</html>
-<script>
-$(document).ready(function() {
-    $('input[type=radio][name=registrarPersona]').change(function() {
-        if (this.value == 'option1') {
-            $("form#formAlumno").css("display","block");
-            $("form#traba").hide();
-        }
-        if (this.value == 'option2') {
-            $("form#formAlumno").hide();
-            $("form#traba").css("display","block");
-        }
-    });
-});
-</script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+@endsection
