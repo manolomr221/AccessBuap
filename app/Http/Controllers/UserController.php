@@ -27,7 +27,7 @@ class UserController extends Controller
         $messages = [
             'mypassword.required' => 'El campo es requerido',
             'password.required' => 'El campo es requerido',
-            'password.confirmed' => 'Los passwords no coinciden',
+            'password.confirmed' => 'Las contraseñas no coinciden',
             'password.min' => 'El mínimo permitido son 6 caracteres',
             'password.max' => 'El máximo permitido son 18 caracteres',
         ];

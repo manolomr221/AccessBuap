@@ -56,7 +56,8 @@
                                      <input type="password"  name="mypassword" class="form-control" >
                             </div>
                                  @if (Session::has('message'))
-                                    <div class="text-danger">
+                                 <br> <br>
+                                    <div class="alert alert-danger text-danger">
                                     {{Session::get('message')}}
                                     </div>
                                  @endif
@@ -67,7 +68,7 @@
                                     <div class="col-sm-10">
                                         <input type="password" class="form-control" name="password">
                                     </div>       
-                            <div class="text-danger" align="center">{{$errors->first('password')}}</div>
+                            <div class="text-danger" align="center"> <strong>  {{$errors->first('password')}}</strong></div>
                             </div>
                         <div class="form-group">
                             <label for="mypassword" class="col-sm-2 control-label">Repetir Contraseña</label>
