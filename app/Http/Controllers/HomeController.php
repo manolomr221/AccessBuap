@@ -135,7 +135,7 @@ class HomeController extends Controller
 
         if (count($alumnos) == 0 && count($profesores) == 0 && count($visitantes) == 0){
             return View('search')
-            ->with('message', 'No hay ningun registro con esa matricula')
+            ->with('message', 'No hay ningun registro con esa matricula...')
             ->with('search', $search);
         } 
         
@@ -201,24 +201,33 @@ class HomeController extends Controller
             ->join('acceso_peatones', 'acceso_peatones.matricula_a' , '=' ,'alumnos.matricula')
             ->select('acceso_peatones.hora_entrada', 'alumnos.*')
             ->where('matricula', 'LIKE', '%'.$search.'%')
-                ->first();
+            ->first();
 
                 $profesores=DB::table('trabajadores')
                 ->join('acceso_peatones', 'acceso_peatones.matricula_t' , '=' ,'trabajadores.matricula')
                 ->select('acceso_peatones.hora_entrada', 'trabajadores.*')
                 ->where('matricula', 'LIKE', '%'.$search.'%')
-                    ->first();
+                ->first();
     
         
          $visitantes = Visitantes::select()
          ->where('no_id', 'LIKE', '%'.$search.'%')
-          ->first();    
+         ->first();   
 
-        if (count($alumnos) == 0 && count($profesores) == 0 && count($visitantes) == 0){
-            return View('search')
-            ->with('message', 'No hay ningun registro con esa matricula')
+          if(count($profesores) >0){
+            return View('salida2')
+            ->with('alumnos', $alumnos)
+            ->with('profesores', $profesores)
+            ->with('visitantes', $visitantes)
+            ->with('search', $search);
+        }
+
+          if (count($alumnos) == 0 && count($profesores) == 0 && count($visitantes) == 0){
+            return View('searchs')
+            ->with('message', 'No hay esa matricula...')
             ->with('search', $search);
         } 
+       
         
         if(count($alumnos) >0){
             return View('salida')
@@ -228,13 +237,7 @@ class HomeController extends Controller
             ->with('search', $search);
         }
 
-        if(count($profesores) >0){
-            return View('salida2')
-            ->with('alumnos', $alumnos)
-            ->with('profesores', $profesores)
-            ->with('visitantes', $visitantes)
-            ->with('search', $search);
-        }
+        
 
         if(count($visitantes) >0){        
             return View('salida3')
@@ -256,12 +259,91 @@ class HomeController extends Controller
     }
 
     public function registrarSalidaT(Request $request){
-        DB::table('acceso_peatones')->update([
-           'hora_salida' => date('Y-m-d 0:0:0'),
-       ]);
+        $hora= $request->hora;
+        $current_time = Carbon::now()->toDateTimeString();
+        DB::table('acceso_peatones')->where('hora_entrada',  '=', $hora )->update([
+            'hora_salida' => $current_time,
+        ]);
+     
     
       return redirect()->action('HomeController@salida');
     }
+
+  
+    public function searchv($search){
+        $search = urldecode($search);
+
+        $alumnos = Alumnos::select()
+                ->where('matricula', 'LIKE', '%'.$search.'%')
+                ->first();
+        
+         $profesores = Trabajadores::select()
+        ->where('matricula', 'LIKE', '%'.$search.'%')
+         ->first();
+        
+         $visitantes = Visitantes::select()
+         ->where('no_id', 'LIKE', '%'.$search.'%')
+          ->first();    
+
+          if (count($alumnos) == 0 && count($profesores) == 0 && count($visitantes) == 0){
+            return View('searchv')
+            ->with('message', 'No hay esa matricula vehiculo...')
+            ->with('search', $search);
+        } 
+       
+        if(count($alumnos) >0){
+            return View('vehiculo1')
+            ->with('alumnos', $alumnos)
+            ->with('profesores', $profesores)
+            ->with('visitantes', $visitantes)
+            ->with('search', $search);
+        }
+
+          if(count($profesores) >0){
+            return View('vehiculo2')
+            ->with('alumnos', $alumnos)
+            ->with('profesores', $profesores)
+            ->with('visitantes', $visitantes)
+            ->with('search', $search);
+        }
+
+        if(count($visitantes) >0){        
+            return View('vehiculo3')
+            ->with('alumnos', $alumnos)
+            ->with('profesores', $profesores)
+            ->with('visitantes', $visitantes)
+            ->with('search', $search);
+        }
+    }
+
+    public function registrarvehiculoA(Request $request ){
+        DB::table('vehiculos')->insert([
+            'placas' =>$request->matriculaA,
+            'marca' =>$request->matriculaA,
+            'modelo'=>$request->matriculaA,
+            'color'=>$request->matriculaA,
+            
+            'matricula_a' =>$request->matriculaA,
+        ]);
+     
+       return redirect()->action('HomeController@index');
+    }
+
+    public function registrarvehiculoT(Request $request){
+        DB::table('acceso_peatones')->insert([
+            'hora_entrada' => date('Y-m-d h:i:s'),
+            'hora_salida' => date('Y-m-d 0:0:0'),
+            'acceso_entrada' => '0' ,
+            'acceso_salida' => '0' ,
+            
+            'matricula_a' =>$request->matriculaA,
+        ]);
+     
+       return redirect()->action('HomeController@index');
+    }
+
+
+
 
 
 }

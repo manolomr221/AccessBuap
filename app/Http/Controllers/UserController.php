@@ -50,12 +50,61 @@ class UserController extends Controller
         }
     }
 
-    public function registrarVehiculo(Request $request){
+    public function registrarVehiculoA(Request $request){
         DB::table('vehiculos')-> insert([
             'placas'=>$request->placa,
             'marca'=>$request->marca,
             'modelo'=>$request->modelo,
-            'color'=>$request->color
+            'color'=>$request->color,
+            'matricula_a' =>$request->matriculaA,
+            ]);
+
+            DB::table('acceso_vehiculos')->insert([
+                'hora_entrada' => date('Y-m-d H:i:s'),
+                'hora_salida' => date('Y-m-d 0:0:0'),
+                'acceso_entrada' => '0' ,
+                'acceso_salida' => '0' ,
+                'placas'=>$request->placa,
+                'matricula_a' =>$request->matriculaA,
+            ]);
+        return redirect()->action('HomeController@vehiculo')->with('message','Registro correcto'); 
+    }
+
+    public function registrarVehiculoT(Request $request){
+        DB::table('vehiculos')-> insert([
+            'placas'=>$request->placa,
+            'marca'=>$request->marca,
+            'modelo'=>$request->modelo,
+            'color'=>$request->color,
+            'matricula_t' =>$request->matriculaT,
+            ]);
+
+            DB::table('acceso_vehiculos')->insert([
+                'hora_entrada' => date('Y-m-d H:i:s'),
+                'hora_salida' => date('Y-m-d 0:0:0'),
+                'acceso_entrada' => '0' ,
+                'acceso_salida' => '0' ,
+                'placas'=>$request->placa,
+                'matricula_t' =>$request->matriculaT,
+            ]);
+        return redirect()->action('HomeController@vehiculo')->with('message','Registro correcto'); 
+    }
+
+    public function registrarVehiculoV(Request $request){
+        DB::table('vehiculos')-> insert([
+            'placas'=>$request->placa,
+            'marca'=>$request->marca,
+            'modelo'=>$request->modelo,
+            'color'=>$request->color,
+            'matricula_v' =>$request->no_id,
+            ]);
+            DB::table('acceso_vehiculos')->insert([
+                'hora_entrada' => date('Y-m-d H:i:s'),
+                'hora_salida' => date('Y-m-d 0:0:0'),
+                'acceso_entrada' => '0' ,
+                'acceso_salida' => '0' ,
+                'placas'=>$request->placa,
+                'matricula_v' =>$request->no_id,
             ]);
         return redirect()->action('HomeController@vehiculo')->with('message','Registro correcto'); 
     }

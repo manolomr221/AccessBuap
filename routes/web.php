@@ -35,7 +35,7 @@ Route::post('/configuracion/{id}/guardarCambios','HomeController@guardarCambios'
 Route::post('/configuracion/{id}/actualizarContraseña','HomeController@actualizaContraseña');
 Route::post('configuracion/{id}/updatepassword', 'UserController@updatePassword');
 
-Route::post('/registrarVehiculo', 'UserController@registrarVehiculo');
+Route::post('/registrarVehiculoA', 'UserController@registrarVehiculoA');
 
 Route::get('home/searchredirect', function(){
      
@@ -60,11 +60,27 @@ Route::get('salida/searchredirect', function(){
     if (empty(Input::get('searchs'))) return redirect()->back();
     
     $search = urlencode(e(Input::get('searchs')));
-    $route = "salida/search/$search";
+    $route = "salida/searchs/$search";
     return redirect($route);
 });
-Route::get("salida/search/{search}", "HomeController@searchs");
+Route::get("salida/searchs/{search}", "HomeController@searchs");
 
 Route::post('/Admin/registrar/SalidaA', 'HomeController@registrarSalidaA');
 
 Route::post('/Admin/registrar/SalidaT', 'HomeController@registrarSalidaT');
+
+
+Route::get('vehiculo/searchredirect', function(){
+     
+    /* Nuevo: si el argumento search está vacío regresar a la página anterior */
+    if (empty(Input::get('searchh'))) return redirect()->back();
+    
+    $search = urlencode(e(Input::get('searchh')));
+    $route = "vehiculo/searchv/$search";
+    return redirect($route);
+});
+Route::get("vehiculo/searchv/{search}", "HomeController@searchv");
+
+Route::post('/registrarVehiculoT', 'UserController@registrarVehiculoT');
+
+Route::post('/registrarVehiculoV', 'UserController@registrarVehiculoV');

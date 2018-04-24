@@ -71,11 +71,11 @@ input[type=text]:focus {
 @section('content')
 
 <div class="container" id="img">
-<br><br><br><br><br>
+<br><br><br>
 
 <div class="container" align="center">
 	<div class="row"  align="center">
-		<h2 id="h2">Ingresa una matricula </h2>
+		<h2 align="center" id="h2">Ingresa una matricula para registrar su salida</h2>
         <div class="search">
         <form id="searchform"  align="center"  role="search" action="{{url('salida/searchredirect')}}">
             <input type="text"  align="center" class="form-control input-sm" minlength="9" name='searchs' placeholder="Ingresa una matricula" /> 
