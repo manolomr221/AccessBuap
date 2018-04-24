@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Crypt;
+use App\Alumnos;
+use App\Trabajadores;
+use App\Visitantes;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 
 class HomeController extends Controller
@@ -33,7 +39,7 @@ class HomeController extends Controller
     {
         return view('home');
     }
-    
+
     public function registrar()
     {
         return view('registrar');
@@ -109,6 +115,152 @@ class HomeController extends Controller
     {
         DB::table('users')->where('email',Auth::user()->email)->update(['password'=>$request->contraseña]);
         return json_encode("Datos Actualizados correctamente");
+    }
+
+
+    
+    public function search($search){
+        $search = urldecode($search);
+        $alumnos = Alumnos::select()
+                ->where('matricula', 'LIKE', '%'.$search.'%')
+                ->first();
+        
+         $profesores = Trabajadores::select()
+        ->where('matricula', 'LIKE', '%'.$search.'%')
+         ->first();
+        
+         $visitantes = Visitantes::select()
+         ->where('no_id', 'LIKE', '%'.$search.'%')
+          ->first();    
+
+        if (count($alumnos) == 0 && count($profesores) == 0 && count($visitantes) == 0){
+            return View('search')
+            ->with('message', 'No hay ningun registro con esa matricula')
+            ->with('search', $search);
+        } 
+        
+        if(count($alumnos) >0){
+            return View('acceso')
+            ->with('alumnos', $alumnos)
+            ->with('profesores', $profesores)
+            ->with('visitantes', $visitantes)
+            ->with('search', $search);
+        }
+
+        if(count($profesores) >0){
+            return View('acceso2')
+            ->with('alumnos', $alumnos)
+            ->with('profesores', $profesores)
+            ->with('visitantes', $visitantes)
+            ->with('search', $search);
+        }
+
+        if(count($visitantes) >0){        
+            return View('acceso3')
+            ->with('alumnos', $alumnos)
+            ->with('profesores', $profesores)
+            ->with('visitantes', $visitantes)
+            ->with('search', $search);
+        }
+    }
+
+    public function registrarAccesoA(Request $request){
+        DB::table('acceso_peatones')->insert([
+           'hora_entrada' => date('Y-m-d h:i:s'),
+           'hora_salida' => date('Y-m-d 0:0:0'),
+           'acceso_entrada' => '0' ,
+           'acceso_salida' => '0' ,
+           
+           'matricula_a' =>$request->matriculaA,
+       ]);
+    
+      return redirect()->action('HomeController@index');
+    }
+
+    public function registrarAccesoT(Request $request){
+        DB::table('acceso_peatones')->insert([
+           'hora_entrada' => date('Y-m-d H:i:s'),
+           'hora_salida' => date('Y-m-d 0:0:0'),
+           'acceso_entrada' => '0' ,
+           'acceso_salida' => '0' ,
+           'matricula_t' =>$request->matriculaT,
+       ]);
+    
+      return redirect()->action('HomeController@index');
+    }
+
+    public function salida()
+    {
+        return view('BuscarSalida');
+    }
+
+    public function searchs($search){
+        $search = urldecode($search);
+
+        $alumnos=DB::table('alumnos')
+            ->join('acceso_peatones', 'acceso_peatones.matricula_a' , '=' ,'alumnos.matricula')
+            ->select('acceso_peatones.hora_entrada', 'alumnos.*')
+            ->where('matricula', 'LIKE', '%'.$search.'%')
+                ->first();
+
+                $profesores=DB::table('trabajadores')
+                ->join('acceso_peatones', 'acceso_peatones.matricula_t' , '=' ,'trabajadores.matricula')
+                ->select('acceso_peatones.hora_entrada', 'trabajadores.*')
+                ->where('matricula', 'LIKE', '%'.$search.'%')
+                    ->first();
+    
+        
+         $visitantes = Visitantes::select()
+         ->where('no_id', 'LIKE', '%'.$search.'%')
+          ->first();    
+
+        if (count($alumnos) == 0 && count($profesores) == 0 && count($visitantes) == 0){
+            return View('search')
+            ->with('message', 'No hay ningun registro con esa matricula')
+            ->with('search', $search);
+        } 
+        
+        if(count($alumnos) >0){
+            return View('salida')
+            ->with('alumnos', $alumnos)
+            ->with('profesores', $profesores)
+            ->with('visitantes', $visitantes)
+            ->with('search', $search);
+        }
+
+        if(count($profesores) >0){
+            return View('salida2')
+            ->with('alumnos', $alumnos)
+            ->with('profesores', $profesores)
+            ->with('visitantes', $visitantes)
+            ->with('search', $search);
+        }
+
+        if(count($visitantes) >0){        
+            return View('salida3')
+            ->with('alumnos', $alumnos)
+            ->with('profesores', $profesores)
+            ->with('visitantes', $visitantes)
+            ->with('search', $search);
+        }
+    }
+
+    public function registrarSalidaA(Request $request ){
+        $hora= $request->hora;
+        $current_time = Carbon::now()->toDateTimeString();
+        DB::table('acceso_peatones')->where('hora_entrada',  '=', $hora )->update([
+           'hora_salida' => $current_time,
+       ]);
+    
+      return redirect()->action('HomeController@salida');
+    }
+
+    public function registrarSalidaT(Request $request){
+        DB::table('acceso_peatones')->update([
+           'hora_salida' => date('Y-m-d 0:0:0'),
+       ]);
+    
+      return redirect()->action('HomeController@salida');
     }
 
 

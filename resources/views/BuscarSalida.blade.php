@@ -48,6 +48,10 @@ input[type=text]:focus {
     right: 0;
     top: 5px;
     border-radius:1px;
+    background-color: #74b9ff; 
+    color: black; 
+    border: 2px solid red;
+
 }
 
 #h2{
@@ -62,22 +66,23 @@ input[type=text]:focus {
     background-image: url("{{ asset('/imagenes/buap.jpg') }}");
 }
 
+
 </style>
 @section('content')
 
 <div class="container" id="img">
 <br><br><br><br><br>
+
 <div class="container" align="center">
 	<div class="row"  align="center">
 		<h2 id="h2">Ingresa una matricula </h2>
         <div class="search">
-        <form id="searchform"  align="center"  role="search" action="{{url('home/searchredirect')}}">
-            <input type="text"  align="center" class="form-control input-sm" minlength="9" name='search' placeholder="Ingresa una matricula" /> 
-            <button type="submit"  align="center" class="btn btn-primary btn-sm">Buscar</button>
+        <form id="searchform"  align="center"  role="search" action="{{url('salida/searchredirect')}}">
+            <input type="text"  align="center" class="form-control input-sm" minlength="9" name='searchs' placeholder="Ingresa una matricula" /> 
+            <button type="submit"  align="center" class="btn  btn-sm">Buscar</button>
         </div>
 	</div>
 </div>
-
-
 </div>
+
 @endsection

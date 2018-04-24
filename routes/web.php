@@ -37,3 +37,34 @@ Route::post('configuracion/{id}/updatepassword', 'UserController@updatePassword'
 
 Route::post('/registrarVehiculo', 'UserController@registrarVehiculo');
 
+Route::get('home/searchredirect', function(){
+     
+    /* Nuevo: si el argumento search está vacío regresar a la página anterior */
+    if (empty(Input::get('search'))) return redirect()->back();
+    
+    $search = urlencode(e(Input::get('search')));
+    $route = "home/search/$search";
+    return redirect($route);
+});
+Route::get("home/search/{search}", "HomeController@search");
+
+Route::post('/Admin/registrar/AccesoA', 'HomeController@registrarAccesoA');
+
+Route::post('/Admin/registrar/AccesoT', 'HomeController@registrarAccesoT');
+
+Route::get('/salida', 'HomeController@salida')->name('BuscarSalida');
+
+Route::get('salida/searchredirect', function(){
+     
+    /* Nuevo: si el argumento search está vacío regresar a la página anterior */
+    if (empty(Input::get('searchs'))) return redirect()->back();
+    
+    $search = urlencode(e(Input::get('searchs')));
+    $route = "salida/search/$search";
+    return redirect($route);
+});
+Route::get("salida/search/{search}", "HomeController@searchs");
+
+Route::post('/Admin/registrar/SalidaA', 'HomeController@registrarSalidaA');
+
+Route::post('/Admin/registrar/SalidaT', 'HomeController@registrarSalidaT');

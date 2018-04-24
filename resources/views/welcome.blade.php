@@ -39,11 +39,7 @@
       font-size: 100%;  
     }
 
-    footer{
-      height: 40%;
-      padding: 5px;
-      padding-bottom: 20px;
-    }
+   
 
     .logo-small {
     color: #5d98f7;
@@ -100,14 +96,14 @@ body{
       <br>
       <br>
       <br>
-       <a href="{{url ('/acceso')}}"><div class="col-sm-3" id="cuadro">
+       <a href="{{url ('/home')}}"><div class="col-sm-3" id="cuadro">
           <span class="glyphicon glyphicon-duplicate logo-small"></span>
           <h4>Registrar Accesos Comunidad Buap</h4>
        </div></a>
-       <div class="col-sm-2" id="cuadro">
+       <a href="{{url ('/salida')}}"><div class="col-sm-2" id="cuadro">
           <span class="glyphicon glyphicon-calendar logo-small"></span>
          <h4>Registrar Salidas</h4>
-      </div>
+      </div></a>
       <a href="{{url ('/Admin/registrar')}}"><div class="col-sm-3" id="cuadro">
          <span class="glyphicon glyphicon-user logo-small"></span>
          <h4>Registrar Personas</h4>
