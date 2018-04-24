@@ -9,6 +9,7 @@
           <input type="text"  align="center" class="form-control input-sm" minlength="9" name='search' placeholder="Ingresa una matricula" /> 
           <button type="submit"  align="center" class="btn btn-primary btn-sm">Buscar</button>
       </div>
+      <button align"center" class="btn btn-primary btn-sm">Visitante</button>
 </div>
 </div>
 <h3 align="center">Resultado de la búsqueda: {{$search}}</h3>

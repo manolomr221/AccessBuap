@@ -19,9 +19,9 @@
       </div>
     </div>
     <div class="form-group">
-      <label class="control-label col-sm-2" for="nombrev">Nombre:</label>
+      <label class="control-label col-sm-2" for="nombreV">Nombre:</label>
       <div class="col-sm-10">          
-        <input type="text" required class="form-control" id="nombrev" placeholder="Ingresa el Nombre del Visitante" name="nombrev">
+        <input type="text" required class="form-control" id="nombreV" placeholder="Ingresa el Nombre del Visitante" name="nombreV">
       </div>
     </div>
     <div class="form-group">
@@ -33,7 +33,7 @@
     <div class="form-group">
       <label class="control-label col-sm-2" for="acceso_entrada">Acceso</label>
       <div class="col-sm-10">          
-        <input type="text" required class="form-control" id="acceso_entrada" placeholder="Ingresa el acceso por el cual entra" name="acceso_entrada">
+        <input type="number" required class="form-control" id="acceso_entrada" placeholder="Ingresa el acceso por el cual entra" name="acceso_entrada">
       </div>
     </div>
     <div class="form-group">        

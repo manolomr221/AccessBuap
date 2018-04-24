@@ -74,8 +74,12 @@ input[type=text]:focus {
         <form id="searchform"  align="center"  role="search" action="{{url('home/searchredirect')}}">
             <input type="text"  align="center" class="form-control input-sm" minlength="9" name='search' placeholder="Ingresa una matricula" /> 
             <button type="submit"  align="center" class="btn btn-primary btn-sm">Buscar</button>
+            
         </div>
+       
 	</div>
+    <a href="{{url('home/RegistroVisitante')}}"> <button type="submit"  align="center" class="btn btn-primary btn-sm" >Visitante</button></a>
+    
 </div>
 
 

@@ -68,3 +68,4 @@ Route::get("salida/search/{search}", "HomeController@searchs");
 Route::post('/Admin/registrar/SalidaA', 'HomeController@registrarSalidaA');
 
 Route::post('/Admin/registrar/SalidaT', 'HomeController@registrarSalidaT');
+Route::get('home/RegistroVisitante', 'HomeController@registroVisitante');

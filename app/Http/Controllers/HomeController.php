@@ -80,7 +80,7 @@ class HomeController extends Controller
         'matricula_v' => $request->no_id,
     ]);
     
-      return redirect()->action('HomeController@registrar');
+      return view('home');
     }
     public function vehiculo()
     {
@@ -201,18 +201,18 @@ class HomeController extends Controller
             ->join('acceso_peatones', 'acceso_peatones.matricula_a' , '=' ,'alumnos.matricula')
             ->select('acceso_peatones.hora_entrada', 'alumnos.*')
             ->where('matricula', 'LIKE', '%'.$search.'%')
-                ->first();
+                ->orderBy('hora_entrada','desc')->first();
 
                 $profesores=DB::table('trabajadores')
                 ->join('acceso_peatones', 'acceso_peatones.matricula_t' , '=' ,'trabajadores.matricula')
                 ->select('acceso_peatones.hora_entrada', 'trabajadores.*')
                 ->where('matricula', 'LIKE', '%'.$search.'%')
-                    ->first();
+                ->orderBy('hora_entrada','desc')->first();
     
         
          $visitantes = Visitantes::select()
          ->where('no_id', 'LIKE', '%'.$search.'%')
-          ->first();    
+         ->orderBy('hora_entrada','desc')->first();
 
         if (count($alumnos) == 0 && count($profesores) == 0 && count($visitantes) == 0){
             return View('search')
@@ -262,7 +262,9 @@ class HomeController extends Controller
     
       return redirect()->action('HomeController@salida');
     }
-
+    public function registroVisitante(){
+        return View('acceso3');
+    }
 
 }
 
