@@ -22,7 +22,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/vehiculo', 'HomeController@vehiculo')->name('vehiculo');
 
 //Registrar
-Route::get('/Admin/registrar', 'HomeController@registrar')->name('registrar');
+
+Route::get('/Admin/registrar', 'HomeController@registrar')->middleware('admin');
 Route::post('/Admin/registrar/nuevoA', 'HomeController@registrarNuevoA')->name('nuevoA');
 Route::post('/Admin/registrar/nuevoT', 'HomeController@registrarNuevoT')->name('nuevoT');
 
