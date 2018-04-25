@@ -81,7 +81,7 @@ input[type=text]:focus {
             <button type="submit"  align="center" class="btn btn-primary btn-sm">Buscar</button>
             
         </div>
-        <a href="{{url('bicicleta/RegistroVisitante')}}"> <button align="center" class="btn btn2 btn-primary btn-sm" >Visitante</button></a>
+      
 	</div>
 </div>
 
