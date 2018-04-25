@@ -16,9 +16,9 @@ class AccesoVehiculos extends Migration
         Schema::create('acceso_vehiculos', function (Blueprint $table) {
             $table->increments('id');
                 $table->dateTime('hora_entrada');
-                $table->dateTime('hora_salida');
+                $table->dateTime('hora_salida')->nullable();
                 $table->string('acceso_entrada');
-                $table->string('acceso_salida');
+                $table->string('acceso_salida')->nullable();
                 $table->string('placas');
                 $table->integer('matricula_a')->nullable();
                 $table->integer('matricula_t')->nullable();

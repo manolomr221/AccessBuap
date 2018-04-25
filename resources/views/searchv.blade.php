@@ -1,6 +1,6 @@
-@extends('layouts.app')
-<style> 
-#search {
+@extends('home')
+<style>
+ #search {
     float: right;
     margin-top: 9px;
     width: 350px;
@@ -55,37 +55,24 @@ input[type=text]:focus {
     font-family: 'Raleway', sans-serif;
     font-weight: 100;
 }
-
-#img{
-    width: 100%;
-    height: 110%;
-    background-image: url("{{ asset('/imagenes/buap.jpg') }}");
-}
-.btn2{
-    top: 300px;
-    right: 46%;
-}
-
 </style>
 @section('content')
-
-<div class="container" id="img">
-<br><br><br><br><br>
 <div class="container" align="center">
 	<div class="row"  align="center">
-		<h2 id="h2">Ingresa una matricula </h2>
+		<h2 align="center" id="h2" style="color:black">Ingresa una matricula para registrar su salida</h2>
         <div class="search">
-        <form id="searchform"  align="center"  role="search" action="{{url('home/searchredirect')}}">
-            <input type="text"  align="center" class="form-control input-sm" minlength="9" name='search' placeholder="Ingresa una matricula" /> 
+        <form id="searchform"  align="center"  role="search" action="{{url('vehiculo/searchredirect')}}">
+            <input type="text"  align="center" class="form-control input-sm" minlength="9" name='searchv' placeholder="Ingresa una matricula" /> 
             <button type="submit"  align="center" class="btn btn-primary btn-sm">Buscar</button>
-            
         </div>
-       
 	</div>
-    <a href="{{url('home/RegistroVisitante')}}"> <button type="submit"  align="center" class="btn btn2 btn-primary btn-sm" >Visitante</button></a>
-    
 </div>
 
-
+<h3 align="center">Resultado de la búsqueda: {{$search}}</h3>
+@if (isset($message))
+<div align="center" class='bg-danger' style='padding: 20px'>
+    {{$message}}
 </div>
-@endsection
+@else
+@endif
+@stop

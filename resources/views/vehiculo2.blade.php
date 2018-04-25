@@ -2,13 +2,13 @@
 @section('content')
   <title>AccesBuap</title>
 <div class="container">
-<h2 align="center">Registrar Salida</h2>
+<h2 align="center">Registrar vehiculo</h2>
   <ul class="nav nav-tabs">
     <li><a data-toggle="tab" href="#menu1">Trabajador</a></li>
   </ul>
     <div id="menu1"  class="tab-pane fade in active">
     <br>
-    <form id="traba" class= "form-horizontal" action="/Admin/registrar/SalidaA" method="POST">
+    <form id="main-contact-form" class= "form-horizontal" name="contact-form" method="POST" action="/registrarVehiculoT" >                                                           
     {{ csrf_field() }}
     <div class="form-group">
       <label class="control-label col-sm-2" for="matriculaT">Numero de Trabajador</label>
@@ -28,12 +28,31 @@
         <input type="text" readonly value="{{$profesores->facultad}}"  required class="form-control" id="facultadT" placeholder="Ingresa la Facultad del Trabajador" name="facultadT">
       </div>
     </div>
+    <h3 align="center">Ingrese datos del vehiculo</h3> 
     <div class="form-group">
-      <label class="control-label col-sm-2" for="hora">Hora Entrada:</label>
+      <label class="control-label col-sm-2" for="placa">Placas:</label>
       <div class="col-sm-10">          
-        <input type="text" required readonly value="{{$profesores->hora_entrada}}"  class="form-control" id="hora" placeholder="Ingresa la Carrera del Alumno" name="hora">
+      <input type="text" name="placa" class="form-control" required="required" placeholder="Ingresa las Placas del vehuiculo">
       </div>
     </div>  
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="marca">Marca:</label>
+      <div class="col-sm-10">          
+      <input type="text" name="marca" class="form-control" required="required" placeholder="Ingresa la Marca del vehiculo">
+      </div>
+    </div>  
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="modelo">Modelo:</label>
+      <div class="col-sm-10">          
+      <input type="text" name="modelo" class="form-control" required="required" placeholder="Ingresa el Modelo del vehiculo">
+      </div>
+    </div>  
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="color">Color:</label>
+      <div class="col-sm-10">          
+      <input type="text" name="color" class="form-control" required="required" placeholder="Ingresa el Color del vehiculo">
+      </div>
+    </div>
     <div class="form-group">        
       <div class="col-sm-offset-2 col-sm-10">
         <button type="submit" class="btn btn-primary form-control" >Guardar Acceso</button>

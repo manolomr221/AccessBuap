@@ -98,7 +98,7 @@ body{
       <br>
        <a href="{{url ('/home')}}"><div class="col-sm-3" id="cuadro">
           <span class="glyphicon glyphicon-duplicate logo-small"></span>
-          <h4>Registrar Accesos Comunidad Buap</h4>
+          <h4>Registrar Accesos </h4>
        </div></a>
        <a href="{{url ('/salida')}}"><div class="col-sm-2" id="cuadro">
           <span class="glyphicon glyphicon-calendar logo-small"></span>
@@ -113,7 +113,8 @@ body{
         <h4>Registrar Vehiculos</h4>
       </div>
       <div class="col-sm-2" id="cuadro" >
-        <span class="glyphicon glyphicon-bold logo-small"></span>
+        <a href="{{url('/bicicletas')}}"><span class="glyphicon glyphicon-bold logo-small"></span></a>
+
         <h4>Registrar Bicicletas</h4>
       </div>
            </div>

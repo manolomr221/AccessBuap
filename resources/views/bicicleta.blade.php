@@ -50,6 +50,11 @@ input[type=text]:focus {
     border-radius:1px;
 }
 
+.btn2{
+    top: 300px;
+    right: 46%;
+}
+
 #h2{
     color: white;
     font-family: 'Raleway', sans-serif;
@@ -61,10 +66,6 @@ input[type=text]:focus {
     height: 110%;
     background-image: url("{{ asset('/imagenes/buap.jpg') }}");
 }
-.btn2{
-    top: 300px;
-    right: 46%;
-}
 
 </style>
 @section('content')
@@ -75,15 +76,13 @@ input[type=text]:focus {
 	<div class="row"  align="center">
 		<h2 id="h2">Ingresa una matricula </h2>
         <div class="search">
-        <form id="searchform"  align="center"  role="search" action="{{url('home/searchredirect')}}">
-            <input type="text"  align="center" class="form-control input-sm" minlength="9" name='search' placeholder="Ingresa una matricula" /> 
+        <form id="searchform"  align="center"  role="search" action="{{url('bicicleta/searchredirect')}}">
+            <input type="text"  align="center" class="form-control input-sm" minlength="9" name='searchBi' placeholder="Ingresa una matricula" /> 
             <button type="submit"  align="center" class="btn btn-primary btn-sm">Buscar</button>
             
         </div>
-       
+        <a href="{{url('bicicleta/RegistroVisitante')}}"> <button align="center" class="btn btn2 btn-primary btn-sm" >Visitante</button></a>
 	</div>
-    <a href="{{url('home/RegistroVisitante')}}"> <button type="submit"  align="center" class="btn btn2 btn-primary btn-sm" >Visitante</button></a>
-    
 </div>
 
 

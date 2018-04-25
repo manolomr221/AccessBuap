@@ -16,17 +16,16 @@ class AccesoBicicletas extends Migration
         Schema::create('acceso_bicicletas', function (Blueprint $table) {
             $table->increments('id');
             $table->dateTime('hora_entrada');
-            $table->dateTime('hora_salida');
+            $table->dateTime('hora_salida')->nullable();
             $table->string('acceso_entrada');
             $table->string('acceso_salida');
-            $table->integer('id_bici')->unsigned();
+            
             $table->integer('matricula_a')->nullable();
             $table->integer('matricula_t')->nullable();
             $table->integer('matricula_v')->nullable();
             $table->foreign('matricula_a')->references('matricula')->on('alumnos')->onDelete('cascade');
             $table->foreign('matricula_t')->references('matricula')->on('trabajadores')->onDelete('cascade');
             $table->foreign('matricula_v')->references('no_id')->on('visitantes')->onDelete('cascade');
-            $table->foreign('id_bici')->references('id_bici')->on('bicicletas')->onDelete('cascade');
 
         });
     }
